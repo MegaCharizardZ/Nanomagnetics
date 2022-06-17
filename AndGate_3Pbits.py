@@ -193,7 +193,7 @@ b.solve()
 Ic=Iin[3]*5*1e-18
 Is=P_SHE*Ic
 c=pbit([],[],[])
-c.solve()
+c.solve()#Aaa is energy matrix
 for t in range(501):
 	c1=Aa.J[0,0]*a.mz_array[t]*a.mz_array[t]+Aa.J[0,1]*a.mz_array[t]*b.mz_array[t]+Aa.J[1,0]*a.mz_array[t]*b.mz_array[t]+Aa.J[1,1]*b.mz_array[t]*b.mz_array[t]+Aa.J[1,2]*c.mz_array[t]*b.mz_array[t]+Aa.J[2,1]*c.mz_array[t]*b.mz_array[t]+Aa.J[2,2]*c.mz_array[t]*c.mz_array[t]+Aa.J[0,2]*a.mz_array[t]*c.mz_array[t]+Aa.J[2,0]*a.mz_array[t]*c.mz_array[t]
 	c2=Aa.hT[0]*a.mz_array[t]+Aa.hT[1]*b.mz_array[t]+Aa.hT[2]*c.mz_array[t]
@@ -209,9 +209,9 @@ for t in range(501):
     if Aaa[t]<mini:
         mini=Aaa[t]
 #mini=Aaa[0]
-mini=-20
+#mini=-20
 a1=[]
-for t in range(501):
+for t in range(501):#We only use energy matrix values which are minimized and when output is clamped to 1
     if c.mz_array[t]==-1 and Aaa[t]<=mini:
         #mini=Aaa[t]
         pos=t
@@ -246,7 +246,7 @@ elif np.sum(bb)<0:
     print(-1)
 print(c.mz_array[pos])
 t=np.linspace(0,2,25050)
-plt.plot(t_coarse_ns,Aaa)
+plt.hist(a1)
 ta=np.linspace(0,10,len(aa))
 tb=np.linspace(0,10,len(bb))
 tc=np.linspace(0,10,len(cc))
