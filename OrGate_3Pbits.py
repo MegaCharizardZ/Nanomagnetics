@@ -222,7 +222,7 @@ e=[]
 for t in range(501):
     e.append(1)
 for t in range(501):
-    if Aaa[t]<=mini and b.mz_array[t]==-1:# c.mz_array[t]==-1 and Aaa[t]<=mini:
+    if Aaa[t]<=mini and c.mz_array[t]==1:# c.mz_array[t]==-1 and Aaa[t]<=mini:
         #mini=Aaa[t]
         pos=t
         aa.append(a.mz_array[t])
@@ -257,7 +257,7 @@ elif np.sum(bb)<0:
     print(-1)
 print(c.mz_array[pos])
 t=np.linspace(0,2,25050)
-plt.plot(t_coarse_ns,Aaa)
+plt.hist(a1)
 ta=np.linspace(0,10,len(aa))
 tb=np.linspace(0,10,len(bb))
 tc=np.linspace(0,10,len(cc))
