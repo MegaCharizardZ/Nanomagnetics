@@ -57,7 +57,7 @@ e=1.6*1e-19
 delta_t=10e-13
 w=mu_0*gamma*Hz  # in 1/s
 
-t_coarse_ns=np.linspace(0,2,501) # in ns
+t_coarse_ns=np.linspace(0,2,1000000) # in ns
 t_coarse=t_coarse_ns*1e-9                 # in s
 t_fine_ns=np.linspace(0,t_coarse_ns[-1],50*len(t_coarse_ns))
 t_fine_ns_array=[]
@@ -233,7 +233,7 @@ Is=P_SHE*Ic
 ca=pbit([],[],[])
 ca.solve()
 Aaa1=[]
-for t in range(501):
+for t in range(1000000):
 	c1=Aa.J[0,0]*a.mz_array[t]*a.mz_array[t]+Aa.J[0,1]*a.mz_array[t]*-b.mz_array[t]+Aa.J[1,0]*a.mz_array[t]*-b.mz_array[t]+Aa.J[1,1]*b.mz_array[t]*b.mz_array[t]+Aa.J[1,2]*ca.mz_array[t]*-b.mz_array[t]+Aa.J[2,1]*ca.mz_array[t]*-b.mz_array[t]+Aa.J[2,2]*ca.mz_array[t]*ca.mz_array[t]+Aa.J[0,2]*a.mz_array[t]*ca.mz_array[t]+Aa.J[2,0]*a.mz_array[t]*ca.mz_array[t]
 	c2=Aa.hT[0]*a.mz_array[t]+Aa.hT[1]*-b.mz_array[t]+Aa.hT[2]*ca.mz_array[t]
 	Aaa=np.append(Aaa,-10*(c2+c1/2))#(P_SHE*Ic*h_cross*k_b*300/(4*e*alpha*k_b*300*k_u*V))*(c2+c1/2))
@@ -252,7 +252,7 @@ Is=P_SHE*Ic
 cb=pbit([],[],[])
 cb.solve()
 
-for t in range(501):
+for t in range(1000000):
 	c1=Aa.J[0,0]*a.mz_array[t]*a.mz_array[t]+Aa.J[0,1]*-a.mz_array[t]*b.mz_array[t]+Aa.J[1,0]*-a.mz_array[t]*b.mz_array[t]+Aa.J[1,1]*b.mz_array[t]*b.mz_array[t]+Aa.J[1,2]*cb.mz_array[t]*b.mz_array[t]+Aa.J[2,1]*cb.mz_array[t]*b.mz_array[t]+Aa.J[2,2]*cb.mz_array[t]*cb.mz_array[t]+Aa.J[0,2]*-a.mz_array[t]*cb.mz_array[t]+Aa.J[2,0]*-a.mz_array[t]*cb.mz_array[t]
 	c2=Aa.hT[0]*-a.mz_array[t]+Aa.hT[1]*b.mz_array[t]+Aa.hT[2]*cb.mz_array[t]
 	Aaa1=np.append(Aaa1,-10*(c2+c1/2))#(P_SHE*Ic*h_cross*k_b*300/(4*e*alpha*k_b*300*k_u*V))*(c2+c1/2))
@@ -262,7 +262,7 @@ Ic=Iin[3]*Iin[3]*5*1e-18
 Is=P_SHE*Ic
 c3=pbit([],[],[])
 c3.solve()
-for t in range(501):
+for t in range(1000000):
 	c1=Ab.J[0,0]*ca.mz_array[t]*ca.mz_array[t]+Ab.J[0,1]*ca.mz_array[t]*cb.mz_array[t]+Ab.J[1,0]*ca.mz_array[t]*cb.mz_array[t]+Ab.J[1,1]*cb.mz_array[t]*cb.mz_array[t]+Ab.J[1,2]*c3.mz_array[t]*cb.mz_array[t]+Ab.J[2,1]*c3.mz_array[t]*cb.mz_array[t]+Ab.J[2,2]*c3.mz_array[t]*c3.mz_array[t]+Ab.J[0,2]*ca.mz_array[t]*c3.mz_array[t]+Ab.J[2,0]*ca.mz_array[t]*c3.mz_array[t]
 	c2=Ab.hT[0]*ca.mz_array[t]+Ab.hT[1]*cb.mz_array[t]+Ab.hT[2]*c3.mz_array[t]
 	Aaa2=np.append(Aaa2,-10*(c2+c1/2))#(P_SHE*Ic*h_cross*k_b*300/(4*e*alpha*k_b*300*k_u*V))*(c2+c1/2))
@@ -275,16 +275,16 @@ aa=[]
 bb=[]
 cc=[]
 # #Clamping
-for t in range(501):
+for t in range(1000000):
     if Aaa2[t]<mini:
         mini=Aaa2[t]
 #mini=Aaa[0]
 #mini=-20
 a1=[]
 e=[]
-for t in range(501):
+for t in range(1000000):
     e.append(1)
-for t in range(501):
+for t in range(1000000):
     if Aaa2[t]<=mini and c3.mz_array[t]==1:# c.mz_array[t]==-1 and Aaa[t]<=mini:
         #mini=Aaa[t]
         pos=t
